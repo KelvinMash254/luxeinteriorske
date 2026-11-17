@@ -302,12 +302,17 @@ function HomePage() {
       {/* WhatsApp strip */}
       <section className="border-y border-border">
         <div className="container-luxe flex flex-col items-start justify-between gap-6 py-10 sm:flex-row sm:items-center">
-          <p className="font-display text-2xl text-emerald sm:text-3xl">Have a project in mind? Let's talk on WhatsApp.</p>
+          <p className="font-display text-2xl text-emerald sm:text-3xl">Have a project in mind? Describe it, or let's talk on WhatsApp.</p>
+          <div className="flex flex-col gap-3 sm:flex-row">
+          <Button asChild size="lg" variant="outline-emerald">
+            <Link to="/design-brief">Create a Design Brief</Link>
+          </Button>
           <Button asChild size="lg" className="bg-whatsapp text-whatsapp-foreground hover:bg-whatsapp/90">
             <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer">
               <WhatsAppIcon className="size-4" /> Message Us
             </a>
           </Button>
+          </div>
         </div>
       </section>
 

@@ -14,6 +14,7 @@ import { Route as SiteIndexRouteImport } from './routes/_site.index'
 import { Route as SiteAboutRouteImport } from './routes/_site.about'
 import { Route as SiteBookConsultationRouteImport } from './routes/_site.book-consultation'
 import { Route as SiteContactRouteImport } from './routes/_site.contact'
+import { Route as SiteDesignBriefRouteImport } from './routes/_site.design-brief'
 import { Route as SitePrivacyPolicyRouteImport } from './routes/_site.privacy-policy'
 import { Route as SiteProcessRouteImport } from './routes/_site.process'
 import { Route as SitePortfolioIndexRouteImport } from './routes/_site.portfolio.index'
@@ -43,6 +44,11 @@ const SiteBookConsultationRoute = SiteBookConsultationRouteImport.update({
 const SiteContactRoute = SiteContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteDesignBriefRoute = SiteDesignBriefRouteImport.update({
+  id: '/design-brief',
+  path: '/design-brief',
   getParentRoute: () => SiteRoute,
 } as any)
 const SitePrivacyPolicyRoute = SitePrivacyPolicyRouteImport.update({
@@ -81,6 +87,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof SiteAboutRoute
   '/book-consultation': typeof SiteBookConsultationRoute
   '/contact': typeof SiteContactRoute
+  '/design-brief': typeof SiteDesignBriefRoute
   '/privacy-policy': typeof SitePrivacyPolicyRoute
   '/process': typeof SiteProcessRoute
   '/portfolio/$slug': typeof SitePortfolioSlugRoute
@@ -92,6 +99,7 @@ export interface FileRoutesByTo {
   '/about': typeof SiteAboutRoute
   '/book-consultation': typeof SiteBookConsultationRoute
   '/contact': typeof SiteContactRoute
+  '/design-brief': typeof SiteDesignBriefRoute
   '/privacy-policy': typeof SitePrivacyPolicyRoute
   '/process': typeof SiteProcessRoute
   '/': typeof SiteIndexRoute
@@ -106,6 +114,7 @@ export interface FileRoutesById {
   '/_site/about': typeof SiteAboutRoute
   '/_site/book-consultation': typeof SiteBookConsultationRoute
   '/_site/contact': typeof SiteContactRoute
+  '/_site/design-brief': typeof SiteDesignBriefRoute
   '/_site/privacy-policy': typeof SitePrivacyPolicyRoute
   '/_site/process': typeof SiteProcessRoute
   '/_site/': typeof SiteIndexRoute
@@ -121,6 +130,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/book-consultation'
     | '/contact'
+    | '/design-brief'
     | '/privacy-policy'
     | '/process'
     | '/portfolio/$slug'
@@ -132,6 +142,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/book-consultation'
     | '/contact'
+    | '/design-brief'
     | '/privacy-policy'
     | '/process'
     | '/'
@@ -145,6 +156,7 @@ export interface FileRouteTypes {
     | '/_site/about'
     | '/_site/book-consultation'
     | '/_site/contact'
+    | '/_site/design-brief'
     | '/_site/privacy-policy'
     | '/_site/process'
     | '/_site/'
@@ -193,6 +205,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof SiteContactRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/design-brief': {
+      id: '/_site/design-brief'
+      path: '/design-brief'
+      fullPath: '/design-brief'
+      preLoaderRoute: typeof SiteDesignBriefRouteImport
       parentRoute: typeof SiteRoute
     }
     '/_site/privacy-policy': {
@@ -244,6 +263,7 @@ interface SiteRouteChildren {
   SiteAboutRoute: typeof SiteAboutRoute
   SiteBookConsultationRoute: typeof SiteBookConsultationRoute
   SiteContactRoute: typeof SiteContactRoute
+  SiteDesignBriefRoute: typeof SiteDesignBriefRoute
   SitePrivacyPolicyRoute: typeof SitePrivacyPolicyRoute
   SiteProcessRoute: typeof SiteProcessRoute
   SiteIndexRoute: typeof SiteIndexRoute
@@ -257,6 +277,7 @@ const SiteRouteChildren: SiteRouteChildren = {
   SiteAboutRoute: SiteAboutRoute,
   SiteBookConsultationRoute: SiteBookConsultationRoute,
   SiteContactRoute: SiteContactRoute,
+  SiteDesignBriefRoute: SiteDesignBriefRoute,
   SitePrivacyPolicyRoute: SitePrivacyPolicyRoute,
   SiteProcessRoute: SiteProcessRoute,
   SiteIndexRoute: SiteIndexRoute,

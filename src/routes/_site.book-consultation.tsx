@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero } from "@/components/site/page-hero";
 import { RequestForm } from "@/components/forms/request-form";
 import { IMG } from "@/lib/images";
@@ -23,7 +23,14 @@ function Book() {
     <>
       <PageHero eyebrow="Book a consultation" title="Begin Your Design Journey." text="Share a few details and your preferred date. Our team will contact you to confirm the consultation." image={IMG.bedroom} imageAlt="Bedroom with emerald velvet headboard" />
       <section className="section-y">
-        <div className="container-luxe max-w-4xl"><RequestForm kind="consultation" /></div>
+        <div className="container-luxe max-w-4xl">
+          <p className="mb-10 border border-border bg-soft p-5 text-sm text-muted-foreground">
+            Not sure how to describe your project? Try our{" "}
+            <Link to="/design-brief" className="text-emerald underline underline-offset-4">Design Brief Assistant</Link>{" "}
+            to turn your notes into a clear brief first.
+          </p>
+          <RequestForm kind="consultation" />
+        </div>
       </section>
     </>
   );

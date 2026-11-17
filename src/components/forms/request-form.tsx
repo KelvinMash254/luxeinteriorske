@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CheckCircle2, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
+import { BRIEF_PREFILL_KEY } from "@/lib/design-brief";
 import { emptyToNull, inquirySchema, makeConsultationSchema, todayISO } from "@/lib/schemas";
 import { BUDGET_OPTIONS, CONSULTATION_METHODS } from "@/lib/site";
 import { SERVICES } from "@/lib/services";
@@ -23,11 +24,22 @@ const field = "mt-2 w-full border border-input bg-background px-4 py-3 text-sm f
 
 export function RequestForm({ kind }: { kind: "inquiry" | "consultation" }) {
   const schema = kind === "inquiry" ? inquirySchema : makeConsultationSchema();
-  const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm<Values>({
+  const { register, handleSubmit, reset, setValue, formState: { errors, isSubmitting } } = useForm<Values>({
     resolver: zodResolver(schema as never),
   });
   const [done, setDone] = useState(false);
   const [failed, setFailed] = useState(false);
+  const [prefilled, setPrefilled] = useState(false);
+
+  useEffect(() => {
+    if (kind !== "consultation") return;
+    const brief = sessionStorage.getItem(BRIEF_PREFILL_KEY);
+    if (brief) {
+      setValue("description", brief);
+      sessionStorage.removeItem(BRIEF_PREFILL_KEY);
+      setPrefilled(true);
+    }
+  }, [kind, setValue]);
 
   async function onSubmit(v: Values) {
     setFailed(false);
@@ -87,7 +99,8 @@ export function RequestForm({ kind }: { kind: "inquiry" | "consultation" }) {
             </select>{err("method")}</label>
         </>
       )}
-      <label className="block sm:col-span-2">{label("Project description", true)}<textarea rows={5} className={field} {...register("description")} />{err("description")}</label>
+      {prefilled && <p className="border-l-2 border-gold pl-3 text-xs text-muted-foreground sm:col-span-2">Your design brief has been added to the project description below. Feel free to edit it before sending.</p>}
+      <label className="block sm:col-span-2">{label("Project description", true)}<textarea rows={kind === "consultation" ? 8 : 5} className={field} {...register("description")} />{err("description")}</label>
       {failed && <p role="alert" className="text-sm text-destructive sm:col-span-2">We couldn't send your request. Please try again, or contact us by phone or WhatsApp.</p>}
       <div className="sm:col-span-2">
         <Button type="submit" size="lg" disabled={isSubmitting}>

@@ -67,6 +67,9 @@ export function SiteFooter() {
             <li>
               <Link to="/book-consultation" className="text-on-dark-muted transition-colors hover:text-gold-light">Book a Consultation</Link>
             </li>
+            <li>
+              <Link to="/design-brief" className="text-on-dark-muted transition-colors hover:text-gold-light">Design Brief Assistant</Link>
+            </li>
           </ul>
         </div>
 

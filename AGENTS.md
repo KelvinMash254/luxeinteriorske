@@ -28,3 +28,8 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+- AI calls go through `@lovable.dev/ai-gateway` inside `createServerFn` handlers (`src/lib/*.functions.ts`); prompts, schemas and parsing live in a client-safe sibling module so they can be unit-tested.
+- Public site pages live under the pathless `_site` layout (header, footer, floating WhatsApp); routes outside it (future admin) get their own layout.
+- Site images are Lovable Assets pointers in `src/assets`; dashboard uploads go to the private `project-images` bucket stored as `storage:<path>` and are resolved to signed URLs in `src/lib/queries.ts`.
