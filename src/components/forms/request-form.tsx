@@ -8,7 +8,17 @@ import { emptyToNull, inquirySchema, makeConsultationSchema, todayISO } from "@/
 import { BUDGET_OPTIONS, CONSULTATION_METHODS } from "@/lib/site";
 import { SERVICES } from "@/lib/services";
 
-type Values = Record<string, string>;
+type Values = {
+  full_name: string;
+  email: string;
+  phone: string;
+  service: string;
+  project_location?: string;
+  budget?: string;
+  description: string;
+  preferred_date?: string;
+  method?: string;
+};
 const field = "mt-2 w-full border border-input bg-background px-4 py-3 text-sm focus:border-emerald focus:outline-none";
 
 export function RequestForm({ kind }: { kind: "inquiry" | "consultation" }) {
@@ -47,7 +57,7 @@ export function RequestForm({ kind }: { kind: "inquiry" | "consultation" }) {
     );
   }
 
-  const err = (k: string) => errors[k]?.message ? <p className="mt-1 text-xs text-destructive">{String(errors[k]?.message)}</p> : null;
+  const err = (k: keyof Values) => errors[k]?.message ? <p className="mt-1 text-xs text-destructive">{String(errors[k]?.message)}</p> : null;
   const label = (t: string, req = false) => <span className="text-xs font-semibold uppercase tracking-[0.16em] text-charcoal">{t}{req && <span className="text-gold-deep"> *</span>}</span>;
 
   return (
