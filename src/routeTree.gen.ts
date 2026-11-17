@@ -11,6 +11,15 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SiteRouteImport } from './routes/_site'
 import { Route as SiteIndexRouteImport } from './routes/_site.index'
+import { Route as SiteAboutRouteImport } from './routes/_site.about'
+import { Route as SiteBookConsultationRouteImport } from './routes/_site.book-consultation'
+import { Route as SiteContactRouteImport } from './routes/_site.contact'
+import { Route as SitePrivacyPolicyRouteImport } from './routes/_site.privacy-policy'
+import { Route as SiteProcessRouteImport } from './routes/_site.process'
+import { Route as SitePortfolioIndexRouteImport } from './routes/_site.portfolio.index'
+import { Route as SitePortfolioSlugRouteImport } from './routes/_site.portfolio.$slug'
+import { Route as SiteServicesIndexRouteImport } from './routes/_site.services.index'
+import { Route as SiteServicesSlugRouteImport } from './routes/_site.services.$slug'
 
 const SiteRoute = SiteRouteImport.update({
   id: '/_site',
@@ -21,24 +30,128 @@ const SiteIndexRoute = SiteIndexRouteImport.update({
   path: '/',
   getParentRoute: () => SiteRoute,
 } as any)
+const SiteAboutRoute = SiteAboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteBookConsultationRoute = SiteBookConsultationRouteImport.update({
+  id: '/book-consultation',
+  path: '/book-consultation',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteContactRoute = SiteContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SitePrivacyPolicyRoute = SitePrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteProcessRoute = SiteProcessRouteImport.update({
+  id: '/process',
+  path: '/process',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SitePortfolioIndexRoute = SitePortfolioIndexRouteImport.update({
+  id: '/portfolio/',
+  path: '/portfolio/',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SitePortfolioSlugRoute = SitePortfolioSlugRouteImport.update({
+  id: '/portfolio/$slug',
+  path: '/portfolio/$slug',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteServicesIndexRoute = SiteServicesIndexRouteImport.update({
+  id: '/services/',
+  path: '/services/',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteServicesSlugRoute = SiteServicesSlugRouteImport.update({
+  id: '/services/$slug',
+  path: '/services/$slug',
+  getParentRoute: () => SiteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof SiteIndexRoute
+  '/about': typeof SiteAboutRoute
+  '/book-consultation': typeof SiteBookConsultationRoute
+  '/contact': typeof SiteContactRoute
+  '/privacy-policy': typeof SitePrivacyPolicyRoute
+  '/process': typeof SiteProcessRoute
+  '/portfolio/$slug': typeof SitePortfolioSlugRoute
+  '/services/$slug': typeof SiteServicesSlugRoute
+  '/portfolio/': typeof SitePortfolioIndexRoute
+  '/services/': typeof SiteServicesIndexRoute
 }
 export interface FileRoutesByTo {
+  '/about': typeof SiteAboutRoute
+  '/book-consultation': typeof SiteBookConsultationRoute
+  '/contact': typeof SiteContactRoute
+  '/privacy-policy': typeof SitePrivacyPolicyRoute
+  '/process': typeof SiteProcessRoute
   '/': typeof SiteIndexRoute
+  '/portfolio/$slug': typeof SitePortfolioSlugRoute
+  '/services/$slug': typeof SiteServicesSlugRoute
+  '/portfolio': typeof SitePortfolioIndexRoute
+  '/services': typeof SiteServicesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_site': typeof SiteRouteWithChildren
+  '/_site/about': typeof SiteAboutRoute
+  '/_site/book-consultation': typeof SiteBookConsultationRoute
+  '/_site/contact': typeof SiteContactRoute
+  '/_site/privacy-policy': typeof SitePrivacyPolicyRoute
+  '/_site/process': typeof SiteProcessRoute
   '/_site/': typeof SiteIndexRoute
+  '/_site/portfolio/$slug': typeof SitePortfolioSlugRoute
+  '/_site/services/$slug': typeof SiteServicesSlugRoute
+  '/_site/portfolio/': typeof SitePortfolioIndexRoute
+  '/_site/services/': typeof SiteServicesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/book-consultation'
+    | '/contact'
+    | '/privacy-policy'
+    | '/process'
+    | '/portfolio/$slug'
+    | '/services/$slug'
+    | '/portfolio/'
+    | '/services/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/_site' | '/_site/'
+  to:
+    | '/about'
+    | '/book-consultation'
+    | '/contact'
+    | '/privacy-policy'
+    | '/process'
+    | '/'
+    | '/portfolio/$slug'
+    | '/services/$slug'
+    | '/portfolio'
+    | '/services'
+  id:
+    | '__root__'
+    | '/_site'
+    | '/_site/about'
+    | '/_site/book-consultation'
+    | '/_site/contact'
+    | '/_site/privacy-policy'
+    | '/_site/process'
+    | '/_site/'
+    | '/_site/portfolio/$slug'
+    | '/_site/services/$slug'
+    | '/_site/portfolio/'
+    | '/_site/services/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -61,15 +174,96 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SiteIndexRouteImport
       parentRoute: typeof SiteRoute
     }
+    '/_site/about': {
+      id: '/_site/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof SiteAboutRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/book-consultation': {
+      id: '/_site/book-consultation'
+      path: '/book-consultation'
+      fullPath: '/book-consultation'
+      preLoaderRoute: typeof SiteBookConsultationRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/contact': {
+      id: '/_site/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof SiteContactRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/privacy-policy': {
+      id: '/_site/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof SitePrivacyPolicyRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/process': {
+      id: '/_site/process'
+      path: '/process'
+      fullPath: '/process'
+      preLoaderRoute: typeof SiteProcessRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/portfolio/': {
+      id: '/_site/portfolio/'
+      path: '/portfolio'
+      fullPath: '/portfolio/'
+      preLoaderRoute: typeof SitePortfolioIndexRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/portfolio/$slug': {
+      id: '/_site/portfolio/$slug'
+      path: '/portfolio/$slug'
+      fullPath: '/portfolio/$slug'
+      preLoaderRoute: typeof SitePortfolioSlugRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/services/': {
+      id: '/_site/services/'
+      path: '/services'
+      fullPath: '/services/'
+      preLoaderRoute: typeof SiteServicesIndexRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/services/$slug': {
+      id: '/_site/services/$slug'
+      path: '/services/$slug'
+      fullPath: '/services/$slug'
+      preLoaderRoute: typeof SiteServicesSlugRouteImport
+      parentRoute: typeof SiteRoute
+    }
   }
 }
 
 interface SiteRouteChildren {
+  SiteAboutRoute: typeof SiteAboutRoute
+  SiteBookConsultationRoute: typeof SiteBookConsultationRoute
+  SiteContactRoute: typeof SiteContactRoute
+  SitePrivacyPolicyRoute: typeof SitePrivacyPolicyRoute
+  SiteProcessRoute: typeof SiteProcessRoute
   SiteIndexRoute: typeof SiteIndexRoute
+  SitePortfolioSlugRoute: typeof SitePortfolioSlugRoute
+  SiteServicesSlugRoute: typeof SiteServicesSlugRoute
+  SitePortfolioIndexRoute: typeof SitePortfolioIndexRoute
+  SiteServicesIndexRoute: typeof SiteServicesIndexRoute
 }
 
 const SiteRouteChildren: SiteRouteChildren = {
+  SiteAboutRoute: SiteAboutRoute,
+  SiteBookConsultationRoute: SiteBookConsultationRoute,
+  SiteContactRoute: SiteContactRoute,
+  SitePrivacyPolicyRoute: SitePrivacyPolicyRoute,
+  SiteProcessRoute: SiteProcessRoute,
   SiteIndexRoute: SiteIndexRoute,
+  SitePortfolioSlugRoute: SitePortfolioSlugRoute,
+  SiteServicesSlugRoute: SiteServicesSlugRoute,
+  SitePortfolioIndexRoute: SitePortfolioIndexRoute,
+  SiteServicesIndexRoute: SiteServicesIndexRoute,
 }
 
 const SiteRouteWithChildren = SiteRoute._addFileChildren(SiteRouteChildren)

@@ -56,7 +56,7 @@ export const projectDetailQuery = (slug: string) =>
       if (error) throw error;
       const index = list.findIndex((p) => p.slug === slug);
       if (index === -1) return null;
-      const project = list[index];
+      const project = list[index]!;
       const { data: images, error: imgErr } = await supabase
         .from("project_images")
         .select("id, project_id, url, caption, kind, sort_order, created_at")
@@ -66,8 +66,8 @@ export const projectDetailQuery = (slug: string) =>
       const related = list.filter((p) => p.id !== project.id && p.category === project.category).slice(0, 3);
       const fill = list.filter((p) => p.id !== project.id && !related.includes(p));
       const relatedFull = [...related, ...fill].slice(0, 3);
-      const prev = list[(index - 1 + list.length) % list.length];
-      const next = list[(index + 1) % list.length];
+      const prev = list[(index - 1 + list.length) % list.length]!;
+      const next = list[(index + 1) % list.length]!;
       const resolve = await resolveImageUrls([
         project.cover_image,
         ...images.map((i) => i.url),

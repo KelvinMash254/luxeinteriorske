@@ -18,8 +18,8 @@ export function SiteFooter() {
   const { data: settings } = useQuery(settingsQuery());
   const socials = SOCIALS.filter((s) => settings?.[s.key]);
   const extra = [
-    settings?.social_tiktok ? { label: "TikTok", href: settings.social_tiktok } : null,
-    settings?.social_pinterest ? { label: "Pinterest", href: settings.social_pinterest } : null,
+    settings?.["social_tiktok"] ? { label: "TikTok", href: settings["social_tiktok"] } : null,
+    settings?.["social_pinterest"] ? { label: "Pinterest", href: settings["social_pinterest"] } : null,
   ].filter(Boolean) as { label: string; href: string }[];
 
   return (
@@ -114,7 +114,6 @@ export function SiteFooter() {
           <p>© {new Date().getFullYear()} Luxe Interiors Ke. All rights reserved.</p>
           <div className="flex gap-6">
             <Link to="/privacy-policy" className="hover:text-gold-light">Privacy Policy</Link>
-            <Link to="/admin" className="hover:text-gold-light">Admin</Link>
           </div>
         </div>
       </div>
